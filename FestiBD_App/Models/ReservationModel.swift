@@ -7,15 +7,15 @@
 
 import Foundation
 
-enum BookingStatus {
+enum ReservationStatus {
     case validated
     case pending
     case cancelled
 }
 
-struct BookingModel: Identifiable {
+struct ReservationModel: Identifiable {
     let id: UUID
-    let status: BookingStatus
+    let status: ReservationStatus
     let workshopID: UUID
     let workshopName: String
     let workshopCategory: String
