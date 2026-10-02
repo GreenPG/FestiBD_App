@@ -7,68 +7,55 @@
 
 import SwiftUI
 
+enum WeekEnd : CaseIterable {
+    case friday
+    case saturday
+    case sunday
+}
+
 struct MenuSectionComponent: View {
     
-    let days = ["friday","saturday","sunday"]
-    @Binding var activeDay: String
+    @Binding var activeDay: WeekEnd
     @Binding var isSelected: Bool
     
     var body: some View {
+        
         VStack{
             HStack{
                 Button{
                     if isSelected == true {
-                        
-                        activeDay = "friday"
+                       activeDay = .friday
                     }
                     isSelected.toggle()
                 }label: {
                     VStack{
                         Text("13")
                             .font(Font.custom("ComicsTricks", size: 67))
-                        
-                        
-                        
                         Text("FRIDAY")
                             .font(Font.custom("ComicsTricks", size: 18))
-                        
-                        
                     }
-                    .foregroundStyle(activeDay == "friday" ? .black : .gray)
+                    .foregroundStyle(activeDay == .friday ? .black : .gray)
                 }
-                .onTapGesture {
-                    
-                }
-                
-                
                 
                 Button{
                     if isSelected == true {
-                        
-                        activeDay = "saturday"
+                       activeDay = .saturday
                     }
                     isSelected.toggle()
                 }label: {
                     VStack{
                         Text("14")
                             .font(Font.custom("ComicsTricks", size: 67))
-                        
                         Text("SATURDAY")
                             .font(Font.custom("ComicsTricks", size: 18))
-                        
                     }
-                    .foregroundStyle(activeDay == "saturday" ? .black : .gray)
-                    
+                    .foregroundStyle(activeDay == .saturday ? .black : .gray)
                 }
                 .padding(40)
-                .onTapGesture{
-                    
-                }
                 
                 Button{
                     if isSelected == true {
-                        
-                        activeDay = "sunday"
+                       activeDay = .sunday
                     }
                     isSelected.toggle()
                     
@@ -76,15 +63,10 @@ struct MenuSectionComponent: View {
                     VStack{
                         Text("15")
                             .font(Font.custom("ComicsTricks", size: 67))
-                        
                         Text("SUNDAY")
                             .font(Font.custom("ComicsTricks", size: 18))
-                        
                     }
-                    .foregroundStyle(activeDay == "sunday" ? .black : .gray)
-                }
-                .onTapGesture{
-                    
+                    .foregroundStyle(activeDay == .sunday ? .black : .gray)
                 }
                 
             }
@@ -94,6 +76,7 @@ struct MenuSectionComponent: View {
 }
 
 #Preview {
-    MenuSectionComponent(activeDay: .constant("friday"), isSelected: .constant(false))
+    MenuSectionComponent(activeDay: .constant(.friday), isSelected: .constant(false))
 }
+
 

@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct HomePageView: View {
-    @State var activeDay: String = "friday"
+    @State var activeDay: WeekEnd = .friday
     @State var isSelected = false
     var body: some View {
         VStack{
