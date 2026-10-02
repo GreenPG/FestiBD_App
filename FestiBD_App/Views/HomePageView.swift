@@ -7,6 +7,8 @@
 import SwiftUI
 
 struct HomePageView: View {
+    @State var activeDay: WeekEnd = .friday
+    @State var isSelected = false
     var body: some View {
         VStack{
             ZStack{
@@ -40,6 +42,10 @@ struct HomePageView: View {
                 }
                 
             }
+            
+            MenuSectionComponent(activeDay: $activeDay, isSelected: $isSelected)
+            
+            
         }
     }
 }

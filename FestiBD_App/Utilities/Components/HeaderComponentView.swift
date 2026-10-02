@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct HeaderComponentView : View {
+    var isSmall : Bool = false
     var body: some View {
-        var isSmall : Bool = false
+        
         
         VStack{
             ZStack{
