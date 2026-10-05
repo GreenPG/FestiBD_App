@@ -8,11 +8,26 @@
 import SwiftUI
 
 struct EmailTextFieldComponent: View {
+
+    @Binding var email: String
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            HStack(spacing: 30) {
+                VStack(alignment: .center) {
+                    Image(systemName: "envelope.fill")
+                        .frame(width: 20, height: 16)
+                }
+                .frame(width: 30)
+                TextField("Email", text: $email)
+                    .font(Font.custom("Armata", size: 20))
+            }
+            Divider()
+                .overlay(.black)
+        }
     }
 }
 
 #Preview {
-    EmailTextFieldComponent()
+    EmailTextFieldComponent(email: .constant(""))
 }
