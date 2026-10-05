@@ -11,42 +11,50 @@ struct HomePageView: View {
     @State var isSelected = false
     var body: some View {
         VStack{
-            ZStack{
-                HeaderComponentView()
-                VStack{
-                    Text("<COMICS ")
-                        .font(Font.custom("ComicsTricks", size: 75))
-                        .foregroundStyle(.white)
-                    
-                    Text("FESTIVAL>")
-                        .font(Font.custom("ComicsTricks", size: 75))
-                        .foregroundStyle(.white)
-                        .padding(.horizontal,20)
-                    
-                    Divider()
-                        .frame(minHeight: 6)
-                        .overlay(Color.yellow)
-                        .padding(.horizontal,30)
-                    
-                    HStack(alignment: .firstTextBaseline){
-                        Text("PROGRAMME")
-                            .font(Font.custom("ComicsTricks", size: 37))
+            ScrollView{
+                ZStack{
+                    HeaderComponentView()
+                    VStack{
+                        Text("<COMICS ")
+                            .font(Font.custom("ComicsTricks", size: 75))
                             .foregroundStyle(.white)
                         
-                        Text("2026")
-                            .font(Font.custom("CoinyCyrillic", size: 67))
+                        Text("FESTIVAL>")
+                            .font(Font.custom("ComicsTricks", size: 75))
                             .foregroundStyle(.white)
+                            .padding(.horizontal,20)
+                        
+                        Divider()
+                            .frame(minHeight: 6)
+                            .overlay(Color.yellow)
+                            .padding(.horizontal,30)
+                        
+                        HStack(alignment: .firstTextBaseline){
+                            Text("PROGRAMME")
+                                .font(Font.custom("ComicsTricks", size: 37))
+                                .foregroundStyle(.white)
+                            
+                            Text("2026")
+                                .font(Font.custom("CoinyCyrillic", size: 67))
+                                .foregroundStyle(.white)
+                        }
+                        
+                        Spacer()
                     }
-                    .padding(.top, 20)
-                    Spacer()
+                    .padding(.top,50)
+                    
                 }
                 
+                
+                MenuSectionComponent(activeDay: $activeDay, isSelected: $isSelected)
+                ForEach(workshops) { workshops in
+                    CardWorkshopComponent(workshopModel: workshops)
+                }
+                .padding()
+                
             }
-            
-            MenuSectionComponent(activeDay: $activeDay, isSelected: $isSelected)
-            
-            
         }
+        .ignoresSafeArea()
     }
 }
 
