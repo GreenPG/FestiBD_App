@@ -9,30 +9,32 @@ import SwiftUI
 
 struct LoginView: View {
 
+
     var body: some View {
         VStack {
             ZStack(alignment: .center) {
                 HeaderComponentView(isSmall: false)
+                Image("Logo")
             }
+            .frame(maxWidth: 376, maxHeight: 376)
             LoginScreenContentView()
+                .padding(.vertical, 0)
         }
     }
 }
 
 struct LoginScreenContentView: View {
 
-    @State var email: String = ""
-    @State var password: String = ""
-    @State var isRememberPasswordChecked: Bool = false
-    @State var isPasswordShowed: Bool = true
+    @State var viewModel = LoginViewModel()
+    @State var isRememberPasswordChecked = false
 
     var body: some View {
         VStack(spacing: 20) {
-            EmailTextFieldComponent(email: $email)
+            EmailTextFieldComponent(email: $viewModel.state.email)
                 .padding(.horizontal, 29)
                 .padding(.top, 30)
                 .padding(.bottom, 10)
-            PasswordTextFieldComponent(password: $password)
+            PasswordTextFieldComponent(password: $viewModel.state.password)
             .padding(.horizontal, 29)
             .padding(.vertical, 10)
             .frame(height: 30)
@@ -70,6 +72,7 @@ struct LoginScreenContentView: View {
                 }
             }
             .font(Font.custom("Armata", size: 16))
+            Spacer()
         }
     }
 }
