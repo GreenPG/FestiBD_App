@@ -21,7 +21,7 @@ struct HeaderComponentView : View {
                     .offset(x: 0, y: -40)
                 
                 Rectangle()
-                    .frame(width: 438, height: isSmall ? 290 : 390)
+                    .frame(width: 438, height: isSmall ? 290 : 400)
                     .foregroundStyle(.orange)
                     .rotationEffect(Angle(degrees: -5))
                 
@@ -33,8 +33,7 @@ struct HeaderComponentView : View {
                 .frame(minHeight: 20)
                 .overlay(Color.yellow)
                 .rotationEffect(Angle(degrees: -5))
-                .offset(y: -75)
-            Spacer()
+                .offset(y: -20)
     }
   }
 }

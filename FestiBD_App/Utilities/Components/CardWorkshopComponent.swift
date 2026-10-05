@@ -40,46 +40,54 @@ struct CardWorkshopComponent: View {
                 .foregroundStyle(.white.quinary)
                 .offset(x: -90, y: -10)
             
-            HStack{
-                ZStack{
-                    Rectangle()
-                        .frame(maxWidth: 300,maxHeight: 50)
-                        .foregroundStyle(.white)
-                        .border(.black, width: 5)
-                        
-                        
-                    Text("\(workshopModel.name)")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                    
-                }
-                .padding(.leading,19)
-                .offset(y: -63)
-                Spacer()
-            }
-            
-            VStack(alignment: .leading){
+            VStack{
                 HStack{
-                    
-                    Image(systemName: "clock")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                        .foregroundStyle(.white)
-                    
-                    Text("\(workshopModel.start_time.formatted(date: .omitted, time: .shortened)) AM - \(workshopModel.end_time.formatted(date: .omitted, time: .shortened)) AM")
+                    ZStack(alignment: .leading){
+                        Rectangle()
+                            .frame(maxWidth: 300,maxHeight: 50)
+                            .foregroundStyle(.white)
+                            .border(.black, width: 5)
+                        
+                        
+                        Text("\(workshopModel.name)")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .padding(.leading,7)
+                        
+                    }
+                    .padding(.leading,18)
+                    .offset(y: -2)
                     Spacer()
                 }
-                HStack{
+                
+                    HStack{
+                        
+                        Image(systemName: "clock")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                            .foregroundStyle(.white)
+                        
+                        Text("\(workshopModel.start_time.formatted(date: .omitted, time: .shortened)) AM - \(workshopModel.end_time.formatted(date: .omitted, time: .shortened)) AM")
+                        Spacer()
+                    }
+                    .padding(.leading,30)
                     
-                    Image(systemName: "tag")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                        .foregroundStyle(.white)
                     
-                    Text("\(workshopModel.category)")
-                }
+                    HStack{
+                        
+                        Image(systemName: "tag")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                            .foregroundStyle(.white)
+                        
+                        Text("\(workshopModel.category)")
+                        Spacer()
+                    }
+                    .padding(.leading,30)
+                
+               
             }
-            .padding(.leading,30)
+            .padding(.bottom,59)
             
             ZStack{
                 UnevenRoundedRectangle(topLeadingRadius: 20,bottomLeadingRadius: 20, bottomTrailingRadius: 0, topTrailingRadius: 0)

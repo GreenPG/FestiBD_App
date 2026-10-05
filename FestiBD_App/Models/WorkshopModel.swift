@@ -78,7 +78,7 @@ var workshops: [WorkshopModel] = [
                   description: "Come to join a dynamic reading groupe, where each person has a role to play.",
                   category: "Reading"),
     WorkshopModel(id: UUID(),
-                  name: "WRITE YOUR OWN UNIVERSE SCRIPT",
+                  name: "WRITE YOUR UNIVERSE",
                   start_time: calendar.date(from: DateComponents(year: 2026, month: 11, day: 14, hour: 11, minute: 00))!,
                   end_time: calendar.date(from: DateComponents(year: 2026, month: 11, day: 14, hour: 12, minute: 30))!,
                   remainingTickets: 6,
