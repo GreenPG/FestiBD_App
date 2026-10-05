@@ -37,6 +37,7 @@ struct MenuSectionComponent: View {
                     .foregroundStyle(activeDay == .friday ? .black : .gray)
                 }
                 
+                  
                 Button{
                     if isSelected == true {
                        activeDay = .saturday
