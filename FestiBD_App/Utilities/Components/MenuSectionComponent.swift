@@ -22,6 +22,7 @@ struct MenuSectionComponent: View {
         
         VStack{
             HStack{
+                
                 Button{
                     if isSelected == true {
                        activeDay = .friday
@@ -52,7 +53,7 @@ struct MenuSectionComponent: View {
                     }
                     .foregroundStyle(activeDay == .saturday ? .black : .gray)
                 }
-                .padding(40)
+                .padding(.horizontal,40)
                 
                 Button{
                     if isSelected == true {
@@ -71,7 +72,7 @@ struct MenuSectionComponent: View {
                 }
                 
             }
-            Spacer()
+          
         }
     }
 }

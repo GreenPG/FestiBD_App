@@ -11,14 +11,13 @@ struct HomePageView: View {
     @State var isSelected = false
     var body: some View {
         VStack{
-            ScrollView{
+            ScrollView {
                 ZStack{
                     HeaderComponentView()
                     VStack{
                         Text("<COMICS ")
                             .font(Font.custom("ComicsTricks", size: 75))
                             .foregroundStyle(.white)
-                        
                         Text("FESTIVAL>")
                             .font(Font.custom("ComicsTricks", size: 75))
                             .foregroundStyle(.white)
@@ -42,22 +41,23 @@ struct HomePageView: View {
                         Spacer()
                     }
                     .padding(.top,50)
+                }
+                VStack {
                     
+                    MenuSectionComponent(activeDay: $activeDay, isSelected: $isSelected)
+                    
+                    ForEach(workshops) { workshops in
+                        CardWorkshopComponent(workshopModel: workshops)
+                    }
+                    .padding()
                 }
-                
-                
-                MenuSectionComponent(activeDay: $activeDay, isSelected: $isSelected)
-                ForEach(workshops) { workshops in
-                    CardWorkshopComponent(workshopModel: workshops)
-                }
-                .padding()
-                
             }
+            .ignoresSafeArea()
+            
         }
-        .ignoresSafeArea()
     }
 }
 
-    #Preview {
-        HomePageView()
-    }
+#Preview {
+    HomePageView()
+}
