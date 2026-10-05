@@ -1,0 +1,79 @@
+//
+//  LoginView.swift
+//  FestiBD_App
+//
+//  Created by Apprenant76 on 05/10/2026.
+//
+
+import SwiftUI
+
+struct LoginView: View {
+
+    var body: some View {
+        VStack {
+            ZStack(alignment: .center) {
+                HeaderComponentView(isSmall: false)
+            }
+            LoginScreenContentView()
+        }
+    }
+}
+
+struct LoginScreenContentView: View {
+
+    @State var email: String = ""
+    @State var password: String = ""
+    @State var isRememberPasswordChecked: Bool = false
+    @State var isPasswordShowed: Bool = true
+
+    var body: some View {
+        VStack(spacing: 20) {
+            EmailTextFieldComponent(email: $email)
+                .padding(.horizontal, 29)
+                .padding(.top, 30)
+                .padding(.bottom, 10)
+            PasswordTextFieldComponent(password: $password)
+            .padding(.horizontal, 29)
+            .padding(.vertical, 10)
+            .frame(height: 30)
+            HStack(spacing: 25) {
+                HStack {
+                    Toggle(
+                        "Remember Me",
+                        systemImage: isRememberPasswordChecked ? "checkmark.square" : "square",
+                        isOn: $isRememberPasswordChecked,
+                    )
+                    .font(Font.custom("Armata", size: 16))
+                    .toggleStyle(.button)
+                    .backgroundStyle(.clear)
+                    .foregroundStyle(.black)
+                    .tint(.clear)
+                }
+                Button {
+                } label: {
+                    Text("Forget password ?")
+                        .font(Font.custom("Armata", size: 16))
+                        .foregroundStyle(.black)
+                }
+            }
+            .padding(.vertical, 25)
+            Button {
+
+            } label: {
+                SigninLoginButtonComponent(isLogin: true)
+            }
+            SigninLoginDividerComponent()
+            .padding(.vertical, 15)
+            HStack {
+                Text("Don't have an account ?")
+                Button("Sign up") {
+                }
+            }
+            .font(Font.custom("Armata", size: 16))
+        }
+    }
+}
+
+#Preview {
+    LoginView()
+}
