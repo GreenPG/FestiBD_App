@@ -4,6 +4,7 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Armata-Regular.ttf</string>
 		<string>ComicsTricks.ttf</string>
 		<string>Coiny-Cyrillic.ttf</string>
 		<string>Cause-Regular.otf</string>
