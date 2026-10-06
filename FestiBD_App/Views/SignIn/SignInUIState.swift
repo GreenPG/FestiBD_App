@@ -12,4 +12,6 @@ struct SignInUIState {
     var email = ""
     var password = ""
     var passwordConfirmation = ""
+
+    var isSignInDisabled = false
 }

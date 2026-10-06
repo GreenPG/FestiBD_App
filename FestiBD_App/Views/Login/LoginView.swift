@@ -26,19 +26,32 @@ struct LoginView: View {
 struct LoginScreenContentView: View {
 
     @State var viewModel = LoginViewModel()
-    @State var isRememberPasswordChecked = false
 
     var body: some View {
         VStack(spacing: 20) {
-            EmailTextFieldComponent(email: $viewModel.state.email)
-                .padding(.top, 30)
-            PasswordTextFieldComponent(password: $viewModel.state.password)
+            EmailTextFieldComponent(
+                email: $viewModel.state.email,
+                isEmailValid: $viewModel.state.isEmailValid
+            )
+            .padding(.top, 30)
+            .frame(minHeight: 73)
+            .onChange(of: viewModel.state.email) {
+                viewModel.checkEmail()
+            }
+            PasswordTextFieldComponent(
+                password: $viewModel.state.password,
+                isPasswordValid: $viewModel.state.isPasswordValid
+            )
+            .frame(minHeight: 73)
+            .onChange(of: viewModel.state.password) {
+                viewModel.checkPassword()
+            }
             HStack(spacing: 25) {
                 HStack {
                     Toggle(
                         "Remember Me",
-                        systemImage: isRememberPasswordChecked ? "checkmark.square" : "square",
-                        isOn: $isRememberPasswordChecked,
+                        systemImage: viewModel.state.isRememberPasswordChecked ? "checkmark.square" : "square",
+                        isOn: $viewModel.state.isRememberPasswordChecked,
                     )
                     .font(Font.custom("Armata", size: 16))
                     .frame(maxWidth: .infinity)
@@ -53,15 +66,20 @@ struct LoginScreenContentView: View {
                         .font(Font.custom("Armata", size: 16))
                         .foregroundStyle(.black)
                 }
-            }
-            .padding(.vertical, 25)
-            Button {
 
-            } label: {
-                SigninLoginButtonComponent(isLogin: true)
             }
+            .padding(.vertical, 10)
+            Button {
+                viewModel.submitLogin()
+            } label: {
+                SigninLoginButtonComponent(
+                    isLogin: true,
+                    isDisabled: viewModel.state.isLoginDisabled
+                )
+            }
+            .disabled(viewModel.state.isLoginDisabled)
             SigninLoginDividerComponent()
-            .padding(.vertical, 15)
+                .padding(.vertical, 15)
             HStack {
                 Text("Don't have an account ?")
                 Button("Sign up") {

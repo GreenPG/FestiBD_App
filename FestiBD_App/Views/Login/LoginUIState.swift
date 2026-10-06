@@ -12,4 +12,10 @@ struct LoginUIState {
     var password: String = ""
     var isRememberPasswordChecked: Bool = false
     var isPasswordShowed: Bool = true
+    var isEmailValid: Bool = true
+    var isPasswordValid: Bool = true
+
+    var isLoginDisabled: Bool {
+        !(isEmailValid && isPasswordValid)
+    }
 }

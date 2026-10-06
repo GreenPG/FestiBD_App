@@ -10,12 +10,13 @@ import SwiftUI
 struct SigninLoginButtonComponent: View {
 
     var isLogin: Bool
+     var isDisabled: Bool
 
     var body: some View {
         ZStack {
             Rectangle()
                 .foregroundColor(.clear)
-                .background(.appYellow)
+                .background(isDisabled ? .disableSecondary : .appYellow)
                 .frame(width: 330, height: 62)
                 .border(.black, width: 3)
                 .cornerRadius(5)
@@ -28,7 +29,7 @@ struct SigninLoginButtonComponent: View {
                             .padding(.vertical, 24)
             }
             .frame(width: 330, height: 62)
-            .background(.accent)
+            .background(isDisabled ? .disableMain : .accent)
             .border(.black, width: 3)
             .cornerRadius(5)
         }
@@ -37,5 +38,5 @@ struct SigninLoginButtonComponent: View {
 }
 
 #Preview {
-    SigninLoginButtonComponent(isLogin: true)
+    SigninLoginButtonComponent(isLogin: true, isDisabled: true)
 }

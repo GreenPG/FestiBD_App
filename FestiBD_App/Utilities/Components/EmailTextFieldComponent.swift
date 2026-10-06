@@ -10,6 +10,7 @@ import SwiftUI
 struct EmailTextFieldComponent: View {
 
     @Binding var email: String
+    @Binding var isEmailValid: Bool
 
     var body: some View {
         VStack {
@@ -25,11 +26,16 @@ struct EmailTextFieldComponent: View {
             }
             .padding(.horizontal, 29)
             Divider()
-                .overlay(.black)
+                .overlay(isEmailValid ? .black : .red)
+            Text(isEmailValid ? "" : "Invalid email")
+                    .foregroundStyle(.red)
+                    .font(Font.custom("Armata", size: 11))
+                    .frame(maxWidth: .infinity, alignment: .trailing)
         }
+        .frame(alignment: .top)
     }
 }
 
 #Preview {
-    EmailTextFieldComponent(email: .constant(""))
+    EmailTextFieldComponent(email: .constant(""), isEmailValid: .constant(true))
 }
