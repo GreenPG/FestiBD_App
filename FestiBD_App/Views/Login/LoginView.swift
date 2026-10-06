@@ -33,6 +33,12 @@ struct LoginScreenContentView: View {
             EmailTextFieldComponent(email: $viewModel.state.email)
                 .padding(.top, 30)
             PasswordTextFieldComponent(password: $viewModel.state.password)
+                .onChange(of: viewModel.state.email) {
+                    viewModel.checkEmail()
+                }
+            .onChange(of: viewModel.state.password) {
+                viewModel.checkPassword()
+            }
             HStack(spacing: 25) {
                 HStack {
                     Toggle(
