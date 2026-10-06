@@ -23,6 +23,8 @@ struct EmailTextFieldComponent: View {
                 TextField("Email", text: $email)
                     .font(Font.custom("Armata", size: 20))
                     .frame(maxWidth: .infinity)
+                    .autocorrectionDisabled()
+                    .textInputAutocapitalization(.never)
             }
             .padding(.horizontal, 29)
             Divider()

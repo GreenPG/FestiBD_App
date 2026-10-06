@@ -29,11 +29,26 @@ struct SignInContentContentView: View {
         VStack(spacing: 20) {
             UsernameTextFieldComponent(
                 username: $viewModel.state.username,
+                isUsernameValid: $viewModel.state.isUsernameValid
             )
             .padding(.top, 30)
-            EmailTextFieldComponent(email: $viewModel.state.email, isEmailValid: .constant(true))
-            PasswordTextFieldComponent(password: $viewModel.state.password, isPasswordValid: .constant(true))
-            PasswordTextFieldComponent(password: $viewModel.state.password, isConfirmationField: true, isPasswordValid: .constant(true))
+            .frame(minHeight: 73)
+            EmailTextFieldComponent(
+                email: $viewModel.state.email,
+                isEmailValid: $viewModel.state.isEmailValid
+            )
+            .frame(minHeight: 73)
+            PasswordTextFieldComponent(
+                password: $viewModel.state.password,
+                isPasswordValid: $viewModel.state.isPasswordValid
+            )
+            .frame(minHeight: 73)
+            PasswordTextFieldComponent(
+                password: $viewModel.state.passwordConfirmation,
+                isConfirmationField: true,
+                isPasswordValid: $viewModel.state.isPasswordConfirmationValid
+            )
+            .frame(minHeight: 73)
             SigninLoginButtonComponent(isLogin: false, isDisabled: viewModel.state.isSignInDisabled)
             SigninLoginDividerComponent()
                 .padding(.vertical, 15)

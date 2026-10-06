@@ -26,10 +26,14 @@ struct PasswordTextFieldComponent: View {
                     TextField(isConfirmationField ? "Confirm Password" : "Password", text: $password)
                         .font(Font.custom("Armata", size: 20))
                         .frame(maxWidth: .infinity)
+                        .autocorrectionDisabled()
+                        .textInputAutocapitalization(.never)
                 } else {
                     SecureField(isConfirmationField ? "Confirm Password" : "Password", text: $password)
                         .font(Font.custom("Armata", size: 20))
                         .frame(maxWidth: .infinity)
+                        .autocorrectionDisabled()
+                        .textInputAutocapitalization(.never)
                 }
                 VStack {
                     Toggle (
