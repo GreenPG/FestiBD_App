@@ -30,12 +30,15 @@ struct LoginScreenContentView: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            EmailTextFieldComponent(email: $viewModel.state.email)
-                .padding(.top, 30)
-            PasswordTextFieldComponent(password: $viewModel.state.password)
-                .onChange(of: viewModel.state.email) {
-                    viewModel.checkEmail()
-                }
+            EmailTextFieldComponent(
+                email: $viewModel.state.email,
+                isEmailValid: $viewModel.state.isEmailValid
+            )
+            .padding(.top, 30)
+            .frame(minHeight: 73)
+            .onChange(of: viewModel.state.email) {
+                viewModel.checkEmail()
+            }
             .onChange(of: viewModel.state.password) {
                 viewModel.checkPassword()
             }
