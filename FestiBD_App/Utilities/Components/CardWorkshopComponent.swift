@@ -47,7 +47,7 @@ struct CardWorkshopComponent: View {
                             .border(.black, width: 5)
                         
                     }
-                    .padding(.leading,18)
+                    
                    
                     Spacer()
                 }
@@ -64,7 +64,7 @@ struct CardWorkshopComponent: View {
                             
                         Spacer()
                     }
-                    .padding(.leading,30)
+                    .padding(.leading,10)
                     .padding(.bottom,2)
                     
                     
@@ -79,11 +79,11 @@ struct CardWorkshopComponent: View {
                             .font(Font.custom("Cause-Regular", size: 18))
                         Spacer()
                     }
-                    .padding(.leading,30)
+                    .padding(.leading,10)
                 
                
             }
-            .padding(.bottom,59)
+            .offset(x: 18, y: -30)
             
             ZStack{
                 UnevenRoundedRectangle(topLeadingRadius: 20,bottomLeadingRadius: 20, bottomTrailingRadius: 0, topTrailingRadius: 0)
