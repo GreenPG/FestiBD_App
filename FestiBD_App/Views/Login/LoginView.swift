@@ -18,7 +18,7 @@ struct LoginView: View {
             }
             .frame(maxWidth: 376, maxHeight: 376)
             LoginScreenContentView()
-                .padding(.vertical, 0)
+                .padding(.horizontal, 16)
         }
     }
 }
@@ -31,13 +31,8 @@ struct LoginScreenContentView: View {
     var body: some View {
         VStack(spacing: 20) {
             EmailTextFieldComponent(email: $viewModel.state.email)
-                .padding(.horizontal, 29)
                 .padding(.top, 30)
-                .padding(.bottom, 10)
             PasswordTextFieldComponent(password: $viewModel.state.password)
-            .padding(.horizontal, 29)
-            .padding(.vertical, 10)
-            .frame(height: 30)
             HStack(spacing: 25) {
                 HStack {
                     Toggle(
@@ -46,6 +41,7 @@ struct LoginScreenContentView: View {
                         isOn: $isRememberPasswordChecked,
                     )
                     .font(Font.custom("Armata", size: 16))
+                    .frame(maxWidth: .infinity)
                     .toggleStyle(.button)
                     .backgroundStyle(.clear)
                     .foregroundStyle(.black)
