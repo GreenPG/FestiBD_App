@@ -25,7 +25,7 @@ struct HomePageView: View {
                         
                         Divider()
                             .frame(minHeight: 6)
-                            .overlay(Color.yellow)
+                            .overlay(Color.appYellow)
                             .padding(.horizontal,30)
                         
                         HStack(alignment: .firstTextBaseline){
