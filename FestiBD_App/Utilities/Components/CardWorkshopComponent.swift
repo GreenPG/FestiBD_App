@@ -38,20 +38,17 @@ struct CardWorkshopComponent: View {
             VStack{
                 HStack{
                     ZStack(alignment: .leading){
-                        Rectangle()
-                            .frame(maxWidth: 300,maxHeight: 50)
-                            .foregroundStyle(.white)
-                            .border(.black, width: 5)
-                        
-                        
+
                         Text("\(workshopModel.name)")
-                            .font(.title2)
+                            .font(Font.custom("ComicsTricks", size: 22))
                             .fontWeight(.bold)
-                            .padding(.leading,9)
+                            .padding(10)
+                            .background(.white)
+                            .border(.black, width: 5)
                         
                     }
                     .padding(.leading,18)
-                    .offset(y: -2)
+                   
                     Spacer()
                 }
                 
@@ -62,10 +59,13 @@ struct CardWorkshopComponent: View {
                             .fontWeight(.semibold)
                             .foregroundStyle(.white)
                         
-                        Text("\(workshopModel.start_time.formatted(date: .omitted, time: .shortened)) - \(workshopModel.end_time.formatted(date: .omitted, time: .shortened))")
+                        Text("\(workshopModel.start_time.formatted(date: .omitted, time: .shortened)) -   \(workshopModel.end_time.formatted(date: .omitted, time: .shortened))")
+                            .font(Font.custom("Cause-Regular", size: 18))
+                            
                         Spacer()
                     }
                     .padding(.leading,30)
+                    .padding(.bottom,2)
                     
                     
                     HStack{
@@ -75,7 +75,8 @@ struct CardWorkshopComponent: View {
                             .fontWeight(.semibold)
                             .foregroundStyle(.white)
                         
-                        Text("\(workshopModel.category)")
+                        Text("\(workshopModel.categoryTheme.rawValue)")
+                            .font(Font.custom("Cause-Regular", size: 18))
                         Spacer()
                     }
                     .padding(.leading,30)
@@ -97,7 +98,7 @@ struct CardWorkshopComponent: View {
                         .fontWeight(.semibold)
                         .foregroundStyle(.white)
                     Text("only \(workshopModel.remainingTickets) tickets left")
-                        .fontWeight(.semibold)
+                        .font(Font.custom("Cause-Regular", size: 18))
                         .foregroundStyle(.white)
                 }
             }
@@ -107,5 +108,5 @@ struct CardWorkshopComponent: View {
 }
 
 #Preview {
-    CardWorkshopComponent(workshopModel: WorkshopModel(id: UUID(),name: "DRAWING A STORYBOARD",start_time: calendar.date(from: DateComponents(year: 2026, month: 11, day: 13, hour: 10, minute: 00))!,end_time: calendar.date(from: DateComponents(year: 2026, month: 11, day: 13, hour: 11, minute: 00))!,remainingTickets: 10,description: "Join this workshop to learn how to create and etablish a storyboard.",category: "Drawing", categoryTheme: .drawing))
+    CardWorkshopComponent(workshopModel: WorkshopModel(id: UUID(),name: "DRAWING A STORYBOARD",start_time: calendar.date(from: DateComponents(year: 2026, month: 11, day: 13, hour: 10, minute: 00))!,end_time: calendar.date(from: DateComponents(year: 2026, month: 11, day: 13, hour: 11, minute: 00))!,remainingTickets: 10,description: "Join this workshop to learn how to create and etablish a storyboard.",categoryTheme: .drawing))
 }
