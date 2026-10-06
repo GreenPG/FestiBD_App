@@ -11,6 +11,7 @@ struct PasswordTextFieldComponent: View {
 
     @Binding var password: String
     @State var isPasswordShowed = false
+    @State var isConfirmationField = false
 
     var body: some View {
         VStack {
@@ -21,11 +22,13 @@ struct PasswordTextFieldComponent: View {
                 }
                 .frame(width: 30)
                 if isPasswordShowed {
-                    TextField("Password", text: $password)
+                    TextField(isConfirmationField ? "Confirm Password" : "Password", text: $password)
                         .font(Font.custom("Armata", size: 20))
+                        .frame(maxWidth: .infinity)
                 } else {
-                    SecureField("Password", text: $password)
+                    SecureField(isConfirmationField ? "Confirm Password" : "Password", text: $password)
                         .font(Font.custom("Armata", size: 20))
+//                        .frame(maxWidth: .infinity)
                 }
                 VStack {
                     Toggle (
@@ -36,8 +39,11 @@ struct PasswordTextFieldComponent: View {
                     .toggleStyle(.button)
                     .foregroundStyle(.black)
                     .tint(.clear)
+                    .frame(width: 20, height: 16)
                 }
             }
+            .padding(.horizontal, 29)
+            .frame(alignment: .leading)
             Divider()
                 .overlay(.black)
         }

@@ -1,25 +1,24 @@
 //
-//  EmailTextFieldComponent.swift
+//  UsernameTextFieldComponent.swift
 //  FestiBD_App
 //
-//  Created by Apprenant76 on 05/10/2026.
+//  Created by Apprenant76 on 06/10/2026.
 //
 
 import SwiftUI
 
-struct EmailTextFieldComponent: View {
+struct UsernameTextFieldComponent: View {
 
-    @Binding var email: String
+    @Binding var username: String
 
-    var body: some View {
+    var body: some View  {
         VStack {
             HStack(spacing: 30) {
                 VStack(alignment: .center) {
-                    Image(systemName: "envelope.fill")
+                    Image(systemName: "person.fill")
                         .frame(width: 20, height: 16)
                 }
-                .frame(width: 30)
-                TextField("Email", text: $email)
+                TextField("Name", text: $username)
                     .font(Font.custom("Armata", size: 20))
                     .frame(maxWidth: .infinity)
             }
@@ -31,5 +30,5 @@ struct EmailTextFieldComponent: View {
 }
 
 #Preview {
-    EmailTextFieldComponent(email: .constant(""))
+    UsernameTextFieldComponent(username: .constant(""))
 }
