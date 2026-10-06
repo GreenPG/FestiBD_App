@@ -26,7 +26,6 @@ struct LoginView: View {
 struct LoginScreenContentView: View {
 
     @State var viewModel = LoginViewModel()
-    @State var isRememberPasswordChecked = false
 
     var body: some View {
         VStack(spacing: 20) {
@@ -51,8 +50,8 @@ struct LoginScreenContentView: View {
                 HStack {
                     Toggle(
                         "Remember Me",
-                        systemImage: isRememberPasswordChecked ? "checkmark.square" : "square",
-                        isOn: $isRememberPasswordChecked,
+                        systemImage: viewModel.state.isRememberPasswordChecked ? "checkmark.square" : "square",
+                        isOn: $viewModel.state.isRememberPasswordChecked,
                     )
                     .font(Font.custom("Armata", size: 16))
                     .frame(maxWidth: .infinity)
@@ -67,15 +66,20 @@ struct LoginScreenContentView: View {
                         .font(Font.custom("Armata", size: 16))
                         .foregroundStyle(.black)
                 }
-            }
-            .padding(.vertical, 25)
-            Button {
 
-            } label: {
-                SigninLoginButtonComponent(isLogin: true)
             }
+            .padding(.vertical, 10)
+            Button {
+                viewModel.submitLogin()
+            } label: {
+                SigninLoginButtonComponent(
+                    isLogin: true,
+                    isDisabled: viewModel.state.isLoginDisabled
+                )
+            }
+            .disabled(viewModel.state.isLoginDisabled)
             SigninLoginDividerComponent()
-            .padding(.vertical, 15)
+                .padding(.vertical, 15)
             HStack {
                 Text("Don't have an account ?")
                 Button("Sign up") {
