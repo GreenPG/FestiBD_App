@@ -45,6 +45,18 @@ struct SignInContentContentView: View {
             .font(Font.custom("Armata", size: 16))
             Spacer()
         }
+        .onChange(of: viewModel.state.username) {
+            viewModel.checkUsername()
+        }
+        .onChange(of: viewModel.state.email) {
+            viewModel.checkEmail()
+        }
+        .onChange(of: viewModel.state.password) {
+            viewModel.checkPassword()
+        }
+        .onChange(of: viewModel.state.passwordConfirmation) {
+            viewModel.checkPasswordConfirmation()
+        }
     }
 }
 
