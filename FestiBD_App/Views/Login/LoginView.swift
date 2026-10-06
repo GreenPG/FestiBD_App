@@ -39,6 +39,11 @@ struct LoginScreenContentView: View {
             .onChange(of: viewModel.state.email) {
                 viewModel.checkEmail()
             }
+            PasswordTextFieldComponent(
+                password: $viewModel.state.password,
+                isPasswordValid: $viewModel.state.isPasswordValid
+            )
+            .frame(minHeight: 73)
             .onChange(of: viewModel.state.password) {
                 viewModel.checkPassword()
             }
