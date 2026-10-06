@@ -53,7 +53,7 @@ struct MenuSectionComponent: View {
                     }
                     .foregroundStyle(activeDay == .saturday ? .black : .gray)
                 }
-                .padding(.horizontal,40)
+                .padding(.horizontal,57)
                 
                 Button{
                     if isSelected == true {
