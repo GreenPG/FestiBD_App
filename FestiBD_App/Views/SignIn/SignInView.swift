@@ -28,12 +28,7 @@ struct SignInContentContentView: View {
     var body: some View {
         VStack(spacing: 20) {
             UsernameTextFieldComponent(
-<<<<<<< Updated upstream
-                username: $viewModel.state.username,
-                isUserNameValid: $viewModel.state.isUsernameValid
-=======
                 username: $viewModel.state.username             
->>>>>>> Stashed changes
             )
             .padding(.top, 30)
             EmailTextFieldComponent(email: $viewModel.state.email)

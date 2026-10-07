@@ -16,12 +16,12 @@ struct HeaderComponentView : View {
             ZStack{
 
                 Rectangle()
-                    .frame(width: 438, height: isSmall ? 290 : 390)
+                    .frame(width: 438, height: isSmall ? 170 : 390)
                     .foregroundStyle(.accent)
                     .offset(x: 0, y: -40)
 
                 Rectangle()
-                    .frame(width: 438, height: isSmall ? 290 : 400)
+                    .frame(width: 438, height: isSmall ? 170 : 400)
                     .foregroundStyle(.accent)
                     .rotationEffect(Angle(degrees: -5))
 

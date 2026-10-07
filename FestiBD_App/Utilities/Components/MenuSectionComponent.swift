@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-enum WeekEnd : CaseIterable {
-    case friday
-    case saturday
-    case sunday
+enum WeekEnd : String, CaseIterable {
+    case friday = "FRIDAY 13"
+    case saturday = "SATURDAY 14"
+    case sunday = "SUNDAY 15"
 }
 
 struct MenuSectionComponent: View {
@@ -74,6 +74,7 @@ struct MenuSectionComponent: View {
             }
           
         }
+        .padding(.vertical,15)
     }
 }
 

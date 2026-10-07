@@ -42,15 +42,16 @@ struct HomePageView: View {
                     }
                     .padding(.top,50)
                 }
-                VStack {
+                VStack(spacing: 15) {
                     
                     MenuSectionComponent(activeDay: $activeDay, isSelected: $isSelected)
                     
                     ForEach(workshops) { workshops in
                         CardWorkshopComponent(workshopModel: workshops)
                     }
-                    .padding()
+                    .padding(.horizontal)
                 }
+                .padding(.bottom,30)
             }
             .ignoresSafeArea()
             
