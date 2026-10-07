@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct HeaderComponentView : View {
-    var isSmall : Bool = false
+//    var isSmall : Bool = false
+    var headerSize: HeaderSizeEnum
     var body: some View {
 
 
@@ -16,28 +17,28 @@ struct HeaderComponentView : View {
             ZStack{
 
                 Rectangle()
-                    .frame(width: 438, height: isSmall ? 170 : 390)
+                    .frame(width: 438, height: headerSize.rawValue)
                     .foregroundStyle(.accent)
                     .offset(x: 0, y: -40)
 
                 Rectangle()
-                    .frame(width: 438, height: isSmall ? 170 : 400)
+                    .frame(width: 438, height: headerSize.rawValue)
                     .foregroundStyle(.accent)
                     .rotationEffect(Angle(degrees: -5))
 
             }
-            .ignoresSafeArea()
-
 
             Divider()
                 .frame(minHeight: 20)
                 .overlay(Color.appYellow)
                 .rotationEffect(Angle(degrees: -5))
                 .offset(y: -20)
+            Spacer()
         }
+        .ignoresSafeArea()
     }
 }
 
 #Preview {
-    HeaderComponentView()
+    HeaderComponentView(headerSize: .LoginSignin)
 }

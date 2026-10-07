@@ -13,7 +13,7 @@ struct HomePageView: View {
         VStack{
             ScrollView {
                 ZStack{
-                    HeaderComponentView()
+                    HeaderComponentView(headerSize: .Home)
                     VStack{
                         Text("<COMICS ")
                             .font(Font.custom("ComicsTricks", size: 75))
@@ -38,20 +38,21 @@ struct HomePageView: View {
                                 .foregroundStyle(.white)
                         }
                         
-                        Spacer()
+                        
                     }
-                    .padding(.top,50)
                 }
-                VStack(spacing: 15) {
-                    
-                    MenuSectionComponent(activeDay: $activeDay, isSelected: $isSelected)
-                    
+
+                MenuSectionComponent(activeDay: $activeDay, isSelected: $isSelected)
+                
+                VStack(spacing: 15){
+ 
                     ForEach(workshops) { workshops in
                         CardWorkshopComponent(workshopModel: workshops)
                     }
                     .padding(.horizontal)
                 }
                 .padding(.bottom,30)
+
             }
             .ignoresSafeArea()
             

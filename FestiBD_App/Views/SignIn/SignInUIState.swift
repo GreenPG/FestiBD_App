@@ -12,4 +12,11 @@ struct SignInUIState {
     var email = ""
     var password = ""
     var passwordConfirmation = ""
+
+    var isUsernameValid = true
+    var isEmailValid = true
+    var isPasswordValid = true
+    var isPasswordConfirmationValid = true
+    var isSignInDisabled = false
+
 }
