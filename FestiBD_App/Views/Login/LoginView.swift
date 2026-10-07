@@ -13,7 +13,7 @@ struct LoginView: View {
     var body: some View {
         VStack {
             ZStack(alignment: .center) {
-                HeaderComponentView(isSmall: false)
+                HeaderComponentView(headerSize: .LoginSignin)
                 Image("Logo")
             }
             .frame(maxWidth: 376, maxHeight: 376)
