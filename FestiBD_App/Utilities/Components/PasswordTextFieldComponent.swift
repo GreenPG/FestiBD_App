@@ -50,6 +50,7 @@ struct PasswordTextFieldComponent: View {
             .padding(.horizontal, 29)
             .frame(alignment: .leading)
             Divider()
+                .frame(height: 1)
                 .overlay(isPasswordValid ? .black : .red)
             Text(isPasswordValid ? "" : "Password Invalid")
                     .foregroundStyle(.red)

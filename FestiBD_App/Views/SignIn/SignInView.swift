@@ -14,7 +14,8 @@ struct SignInView: View {
                 HeaderComponentView(headerSize: .LoginSignin)
                 Image("Logo")
             }
-            .frame(maxWidth: 376, maxHeight: 376)
+            .ignoresSafeArea()
+            .frame(maxWidth: 376, maxHeight: 325)
             SignInContentContentView()
                 .padding(.horizontal, 16)
         }
@@ -26,29 +27,29 @@ struct SignInContentContentView: View {
     @State var viewModel = SignInViewModel()
 
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 18) {
             UsernameTextFieldComponent(
                 username: $viewModel.state.username,
                 isUsernameValid: $viewModel.state.isUsernameValid
             )
             .padding(.top, 30)
-            .frame(minHeight: 73)
+            .frame(minHeight: 80)
             EmailTextFieldComponent(
                 email: $viewModel.state.email,
                 isEmailValid: $viewModel.state.isEmailValid
             )
-            .frame(minHeight: 73)
+            .frame(minHeight: 50)
             PasswordTextFieldComponent(
                 password: $viewModel.state.password,
                 isPasswordValid: $viewModel.state.isPasswordValid
             )
-            .frame(minHeight: 73)
+            .frame(minHeight: 50)
             PasswordTextFieldComponent(
                 password: $viewModel.state.passwordConfirmation,
                 isConfirmationField: true,
                 isPasswordValid: $viewModel.state.isPasswordConfirmationValid
             )
-            .frame(minHeight: 73)
+            .frame(minHeight: 50)
             SigninLoginButtonComponent(isLogin: false, isDisabled: viewModel.state.isSignInDisabled)
             SigninLoginDividerComponent()
                 .padding(.vertical, 15)

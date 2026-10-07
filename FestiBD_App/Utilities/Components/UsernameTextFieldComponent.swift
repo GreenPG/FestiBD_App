@@ -27,6 +27,7 @@ struct UsernameTextFieldComponent: View {
             }
             .padding(.horizontal, 29)
             Divider()
+                .frame(height: 1)
                 .overlay(.black)
             Text(isUsernameValid ? "" : "Invalid username")
                     .foregroundStyle(.red)

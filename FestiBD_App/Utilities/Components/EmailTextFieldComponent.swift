@@ -28,6 +28,7 @@ struct EmailTextFieldComponent: View {
             }
             .padding(.horizontal, 29)
             Divider()
+                .frame(height: 1)
                 .overlay(isEmailValid ? .black : .red)
             Text(isEmailValid ? "" : "Invalid email")
                     .foregroundStyle(.red)
