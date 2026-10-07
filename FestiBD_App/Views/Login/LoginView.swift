@@ -13,10 +13,11 @@ struct LoginView: View {
     var body: some View {
         VStack {
             ZStack(alignment: .center) {
-                HeaderComponentView(isSmall: false)
+                HeaderComponentView(headerSize: .LoginSignin)
                 Image("Logo")
             }
-            .frame(maxWidth: 376, maxHeight: 376)
+            .ignoresSafeArea()
+            .frame(maxWidth: 376, maxHeight: 325)
             LoginScreenContentView()
                 .padding(.horizontal, 16)
         }
@@ -34,7 +35,7 @@ struct LoginScreenContentView: View {
                 isEmailValid: $viewModel.state.isEmailValid
             )
             .padding(.top, 30)
-            .frame(minHeight: 73)
+            .frame(minHeight: 60)
             .onChange(of: viewModel.state.email) {
                 viewModel.checkEmail()
             }
@@ -42,7 +43,7 @@ struct LoginScreenContentView: View {
                 password: $viewModel.state.password,
                 isPasswordValid: $viewModel.state.isPasswordValid
             )
-            .frame(minHeight: 73)
+            .frame(minHeight: 60)
             .onChange(of: viewModel.state.password) {
                 viewModel.checkPassword()
             }
@@ -68,7 +69,7 @@ struct LoginScreenContentView: View {
                 }
 
             }
-            .padding(.vertical, 10)
+            .padding(.vertical, 30)
             Button {
                 viewModel.submitLogin()
             } label: {
@@ -86,7 +87,6 @@ struct LoginScreenContentView: View {
                 }
             }
             .font(Font.custom("Armata", size: 16))
-            Spacer()
         }
     }
 }

@@ -13,7 +13,7 @@ struct HomePageView: View {
         VStack{
             ScrollView {
                 ZStack{
-                    HeaderComponentView()
+                    HeaderComponentView(headerSize: .Home)
                     VStack{
                         Text("<COMICS ")
                             .font(Font.custom("ComicsTricks", size: 75))
