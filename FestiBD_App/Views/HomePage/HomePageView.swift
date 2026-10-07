@@ -41,18 +41,18 @@ struct HomePageView: View {
                         
                     }
                 }
-                
-                
+
                 MenuSectionComponent(activeDay: $activeDay, isSelected: $isSelected)
                 
                 VStack(spacing: 15){
-                    
+ 
                     ForEach(workshops) { workshops in
                         CardWorkshopComponent(workshopModel: workshops)
                     }
-                    
+                    .padding(.horizontal)
                 }
-                .padding()
+                .padding(.bottom,30)
+
             }
             .ignoresSafeArea()
             

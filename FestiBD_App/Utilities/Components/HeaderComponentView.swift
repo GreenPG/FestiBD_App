@@ -27,8 +27,6 @@ struct HeaderComponentView : View {
                     .rotationEffect(Angle(degrees: -5))
 
             }
-//            .ignoresSafeArea()
-
 
             Divider()
                 .frame(minHeight: 20)
