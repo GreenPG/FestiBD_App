@@ -7,12 +7,6 @@
 
 import SwiftUI
 
-enum WeekEnd : String, CaseIterable {
-    case friday = "FRIDAY 13"
-    case saturday = "SATURDAY 14"
-    case sunday = "SUNDAY 15"
-}
-
 struct MenuSectionComponent: View {
     
     @Binding var activeDay: WeekEnd
@@ -24,10 +18,11 @@ struct MenuSectionComponent: View {
             HStack{
                 
                 Button{
+                    isSelected.toggle()
                     if isSelected == true {
                        activeDay = .friday
                     }
-                    isSelected.toggle()
+                    
                 }label: {
                     VStack{
                         Text("13")
@@ -40,10 +35,11 @@ struct MenuSectionComponent: View {
                 
                   
                 Button{
+                    isSelected.toggle()
                     if isSelected == true {
                        activeDay = .saturday
                     }
-                    isSelected.toggle()
+                    
                 }label: {
                     VStack{
                         Text("14")
@@ -56,11 +52,11 @@ struct MenuSectionComponent: View {
                 .padding(.horizontal,57)
                 
                 Button{
+                    isSelected.toggle()
                     if isSelected == true {
                        activeDay = .sunday
                     }
-                    isSelected.toggle()
-                    
+                   
                 }label: {
                     VStack{
                         Text("15")

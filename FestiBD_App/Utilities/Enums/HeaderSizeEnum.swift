@@ -10,5 +10,5 @@ import Foundation
 enum HeaderSizeEnum: CGFloat {
     case LoginSignin = 325
     case Home = 400
-    case Reservations = 290
+    case Reservations = 200
 }
