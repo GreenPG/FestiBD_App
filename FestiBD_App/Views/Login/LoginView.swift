@@ -27,6 +27,7 @@ struct LoginView: View {
 struct LoginScreenContentView: View {
 
     @State var viewModel = LoginViewModel()
+    @Environment(Router.self) private var router
 
     var body: some View {
         VStack(spacing: 20) {
@@ -84,13 +85,16 @@ struct LoginScreenContentView: View {
             HStack {
                 Text("Don't have an account ?")
                 Button("Sign up") {
+                    router.navigate(to: .Signin)
                 }
             }
             .font(Font.custom("Armata", size: 16))
         }
+        .navigationBarBackButtonHidden()
     }
 }
 
 #Preview {
     LoginView()
+        .environment(Router())
 }

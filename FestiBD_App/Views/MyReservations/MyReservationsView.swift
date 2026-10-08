@@ -7,6 +7,9 @@
 import SwiftUI
 
 struct MyReservationsView : View {
+
+    @Environment(Router.self) private var router
+
     var body: some View {
         
         VStack{
@@ -23,7 +26,12 @@ struct MyReservationsView : View {
                 VStack(spacing: 0){
                     
                     ForEach(workshops) { workshops in
-                        MiniCardWorkshopComponent(workshopModel: workshops)
+                        Button {
+                            router.navigate(to: .WorkshopDetail(workshopId: UUID()))
+                        } label: {
+                            MiniCardWorkshopComponent(workshopModel: workshops)
+                        }
+                        .tint(.black)
                     }
                     .padding(.horizontal)
                 }
@@ -34,7 +42,12 @@ struct MyReservationsView : View {
                 VStack(spacing: 0){
                     
                     ForEach(workshops) { workshops in
-                        MiniCardWorkshopComponent(workshopModel: workshops)
+                        Button {
+                            router.navigate(to: .WorkshopDetail(workshopId: UUID()))
+                        } label: {
+                            MiniCardWorkshopComponent(workshopModel: workshops)
+                        }
+                        .tint(.black)
                     }
                     .padding(.horizontal)
                 }
@@ -44,7 +57,12 @@ struct MyReservationsView : View {
                 VStack(spacing: 0){
                     
                     ForEach(workshops) { workshops in
-                        MiniCardWorkshopComponent(workshopModel: workshops)
+                        Button {
+                            router.navigate(to: .WorkshopDetail(workshopId: UUID()))
+                        } label: {
+                            MiniCardWorkshopComponent(workshopModel: workshops)
+                        }
+                        .tint(.black)
                     }
                     .padding(.horizontal)
                 }
@@ -57,4 +75,5 @@ struct MyReservationsView : View {
 
 #Preview {
     MyReservationsView()
+        .environment(Router())
 }
