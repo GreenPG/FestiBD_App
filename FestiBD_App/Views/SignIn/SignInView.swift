@@ -25,6 +25,7 @@ struct SignInView: View {
 struct SignInContentContentView: View {
 
     @State var viewModel = SignInViewModel()
+    @Environment(Router.self) private var router
 
     var body: some View {
         VStack(spacing: 18) {
@@ -33,7 +34,7 @@ struct SignInContentContentView: View {
                 isUsernameValid: $viewModel.state.isUsernameValid
             )
             .padding(.top, 30)
-            .frame(minHeight: 80)
+            .frame(minHeight: 60)
             EmailTextFieldComponent(
                 email: $viewModel.state.email,
                 isEmailValid: $viewModel.state.isEmailValid
@@ -56,6 +57,7 @@ struct SignInContentContentView: View {
             HStack {
                 Text("Already have an account ?")
                 Button("Log In") {
+                    router.navigate(to: .Login)
                 }
             }
             .font(Font.custom("Armata", size: 16))
@@ -73,9 +75,11 @@ struct SignInContentContentView: View {
         .onChange(of: viewModel.state.passwordConfirmation) {
             viewModel.checkPasswordConfirmation()
         }
+        .navigationBarBackButtonHidden()
     }
 }
 
 #Preview {
     SignInView()
+        .environment(Router())
 }
