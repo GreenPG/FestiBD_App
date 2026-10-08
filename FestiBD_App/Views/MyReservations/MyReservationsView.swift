@@ -12,7 +12,7 @@ struct MyReservationsView : View {
         VStack{
             ScrollView {
                 ZStack{
-                    HeaderComponentView(isSmall: true)
+                    HeaderComponentView(headerSize: .Reservations)
                     Text("MY RESERVATIONS")
                         .font(Font.custom("ComicsTricks", size: 40))
                         .foregroundStyle(.white)
@@ -29,7 +29,7 @@ struct MyReservationsView : View {
                 }
                 .padding(.bottom,30)
                 
-               
+                
                 ReservationsDayTittleComponent(weekEnd: .saturday)
                 VStack(spacing: 0){
                     
@@ -39,7 +39,7 @@ struct MyReservationsView : View {
                     .padding(.horizontal)
                 }
                 .padding(.bottom,30)
-
+                
                 ReservationsDayTittleComponent(weekEnd: .sunday)
                 VStack(spacing: 0){
                     

@@ -1,5 +1,5 @@
 //
-//  CategoryColor.swift
+//  CategoryColorEnum.swift
 //  FestiBD_App
 //
 //  Created by Apprenant 85 on 06/10/2026.
