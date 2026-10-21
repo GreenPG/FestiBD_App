@@ -51,7 +51,16 @@ struct SignInContentContentView: View {
                 isPasswordValid: $viewModel.state.isPasswordConfirmationValid
             )
             .frame(minHeight: 50)
-            SigninLoginButtonComponent(isLogin: false, isDisabled: viewModel.state.isSignInDisabled)
+            Button {
+                Task {
+                    await viewModel.submitSignIn()
+                }
+            } label: {
+                SigninLoginButtonComponent(isLogin: false, isDisabled: viewModel.state.isSignInDisabled)
+            }
+            Text(viewModel.state.hasSignInFail ? "Error during sign in" : "")
+                .foregroundStyle(.red)
+                .font(Font.custom("Atrama", size: 14))
             SigninLoginDividerComponent()
                 .padding(.vertical, 15)
             HStack {

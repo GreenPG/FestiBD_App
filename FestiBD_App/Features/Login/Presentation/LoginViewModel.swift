@@ -35,13 +35,14 @@ final class LoginViewModel {
         state.isPasswordValid = true
     }
 
-    func submitLogin() {
+    func submitLogin() async {
         checkEmail()
         checkPassword()
         guard !state.isLoginDisabled else {
             return
         }
-        // TODO: add login request
+
+
     }
 
 }

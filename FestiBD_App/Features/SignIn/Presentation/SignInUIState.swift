@@ -18,5 +18,6 @@ struct SignInUIState {
     var isPasswordValid = true
     var isPasswordConfirmationValid = true
     var isSignInDisabled = false
+    var hasSignInFail = false
 
 }

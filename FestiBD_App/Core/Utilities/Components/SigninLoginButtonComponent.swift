@@ -10,7 +10,7 @@ import SwiftUI
 struct SigninLoginButtonComponent: View {
 
     var isLogin: Bool
-     var isDisabled: Bool
+    var isDisabled: Bool
 
     var body: some View {
         ZStack {
@@ -26,7 +26,7 @@ struct SigninLoginButtonComponent: View {
                 Text(isLogin ? "LOG IN" : "SIGN IN")
                     .font(Font.custom("ComicsTricks", size: 32))
                     .foregroundStyle(.white)
-                            .padding(.vertical, 24)
+                    .padding(.vertical, 24)
             }
             .frame(width: 330, height: 62)
             .background(isDisabled ? .disableMain : .accent)
