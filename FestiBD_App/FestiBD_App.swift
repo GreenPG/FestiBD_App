@@ -9,6 +9,9 @@ import SwiftUI
 
 @main
 struct FestiBD_AppApp: App {
+
+    private var accountManager = AccountManager()
+
     var body: some Scene {
         WindowGroup {
             Main()
