@@ -13,10 +13,14 @@ enum Route: Hashable {
     case Home
     case WorkshopDetail(workshopId: UUID)
     case Reservations
+    case TabBar
 }
 
 @Observable
 class Router {
+
+    static let shared = Router()
+
     var path = NavigationPath()
 
     func navigate(to route: Route) {
