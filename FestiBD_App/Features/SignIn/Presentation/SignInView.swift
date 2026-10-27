@@ -25,7 +25,6 @@ struct SignInView: View {
 struct SignInContentContentView: View {
 
     @State var viewModel = SignInViewModel()
-    @Environment(Router.self) private var router
 
     var body: some View {
         VStack(spacing: 18) {
@@ -53,7 +52,9 @@ struct SignInContentContentView: View {
             .frame(minHeight: 50)
             Button {
                 Task {
+                    viewModel.state.isSignInDisabled = true
                     await viewModel.submitSignIn()
+                    viewModel.state.isSignInDisabled = false
                 }
             } label: {
                 SigninLoginButtonComponent(isLogin: false, isDisabled: viewModel.state.isSignInDisabled)
@@ -65,8 +66,8 @@ struct SignInContentContentView: View {
                 .padding(.vertical, 15)
             HStack {
                 Text("Already have an account ?")
-                Button("Log In") {
-                    router.navigate(to: .Login)
+                NavigationLink("Log In") {
+                    LoginView()
                 }
             }
             .font(Font.custom("Armata", size: 16))
@@ -90,5 +91,4 @@ struct SignInContentContentView: View {
 
 #Preview {
     SignInView()
-        .environment(Router())
 }
