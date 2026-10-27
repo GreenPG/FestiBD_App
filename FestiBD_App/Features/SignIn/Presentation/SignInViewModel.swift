@@ -10,6 +10,7 @@ import Foundation
 @Observable
 final class SignInViewModel {
     var state = SignInUIState()
+    let accountManager = AccountManager.shared
 
     func checkUsername() {
         guard !state.username.isEmpty else {
@@ -57,8 +58,15 @@ final class SignInViewModel {
         state.isPasswordConfirmationValid = true
     }
 
-    func submitSignIn() {
-
+    func submitSignIn() async {
+        state.hasSignInFail = false
+        do {
+            try await accountManager
+                .signin(username: state.username, email: state.email, password: state.password)
+            try await accountManager.login(email: state.email, password: state.password)
+        } catch  {
+            state.hasSignInFail = true
+        }
     }
 
 }

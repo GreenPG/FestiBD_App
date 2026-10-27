@@ -27,7 +27,6 @@ struct LoginView: View {
 struct LoginScreenContentView: View {
 
     @State var viewModel = LoginViewModel()
-    @Environment(Router.self) private var router
 
     var body: some View {
         VStack(spacing: 20) {
@@ -52,8 +51,8 @@ struct LoginScreenContentView: View {
                 HStack {
                     Toggle(
                         "Remember Me",
-                        systemImage: viewModel.state.isRememberPasswordChecked ? "checkmark.square" : "square",
-                        isOn: $viewModel.state.isRememberPasswordChecked,
+                        systemImage: viewModel.state.isRememberMeActive ? "checkmark.square" : "square",
+                        isOn: $viewModel.state.isRememberMeActive,
                     )
                     .font(Font.custom("Armata", size: 16))
                     .frame(maxWidth: .infinity)
@@ -72,7 +71,11 @@ struct LoginScreenContentView: View {
             }
             .padding(.vertical, 30)
             Button {
-                viewModel.submitLogin()
+                Task {
+                    viewModel.state.isLoginDisabled = true
+                    await viewModel.submitLogin()
+                    viewModel.state.isLoginDisabled = false
+                }
             } label: {
                 SigninLoginButtonComponent(
                     isLogin: true,
@@ -80,12 +83,15 @@ struct LoginScreenContentView: View {
                 )
             }
             .disabled(viewModel.state.isLoginDisabled)
+            Text(viewModel.state.hasLoginFailed ? "Login Failed : \(viewModel.state.loginErrorMessage)" : "")
+                .foregroundStyle(.red)
+                .font(Font.custom("Atrama", size: 14))
             SigninLoginDividerComponent()
                 .padding(.vertical, 15)
             HStack {
                 Text("Don't have an account ?")
-                Button("Sign up") {
-                    router.navigate(to: .Signin)
+                NavigationLink("Sign up") {
+                    SignInView()
                 }
             }
             .font(Font.custom("Armata", size: 16))
@@ -96,5 +102,4 @@ struct LoginScreenContentView: View {
 
 #Preview {
     LoginView()
-        .environment(Router())
 }

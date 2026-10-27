@@ -25,7 +25,6 @@ struct SignInView: View {
 struct SignInContentContentView: View {
 
     @State var viewModel = SignInViewModel()
-    @Environment(Router.self) private var router
 
     var body: some View {
         VStack(spacing: 18) {
@@ -51,13 +50,24 @@ struct SignInContentContentView: View {
                 isPasswordValid: $viewModel.state.isPasswordConfirmationValid
             )
             .frame(minHeight: 50)
-            SigninLoginButtonComponent(isLogin: false, isDisabled: viewModel.state.isSignInDisabled)
+            Button {
+                Task {
+                    viewModel.state.isSignInDisabled = true
+                    await viewModel.submitSignIn()
+                    viewModel.state.isSignInDisabled = false
+                }
+            } label: {
+                SigninLoginButtonComponent(isLogin: false, isDisabled: viewModel.state.isSignInDisabled)
+            }
+            Text(viewModel.state.hasSignInFail ? "Error during sign in" : "")
+                .foregroundStyle(.red)
+                .font(Font.custom("Atrama", size: 14))
             SigninLoginDividerComponent()
                 .padding(.vertical, 15)
             HStack {
                 Text("Already have an account ?")
-                Button("Log In") {
-                    router.navigate(to: .Login)
+                NavigationLink("Log In") {
+                    LoginView()
                 }
             }
             .font(Font.custom("Armata", size: 16))
@@ -81,5 +91,4 @@ struct SignInContentContentView: View {
 
 #Preview {
     SignInView()
-        .environment(Router())
 }
