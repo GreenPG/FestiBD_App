@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct HomePageUIState {
+    var activeDay: WeekEnd = .friday
+    var workshops: [WorkshopModel] = []
+}

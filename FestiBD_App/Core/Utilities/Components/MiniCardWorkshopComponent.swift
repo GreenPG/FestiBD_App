@@ -50,7 +50,7 @@ struct MiniCardWorkshopComponent: View {
             }
             HStack{
                 Spacer()
-                Text("\(workshopModel.start_time.formatted(date: .omitted, time: .shortened)) -   \(workshopModel.end_time.formatted(date: .omitted, time: .shortened))")
+                Text("\(workshopModel.startTime.formatted(date: .omitted, time: .shortened)) -   \(workshopModel.endTime.formatted(date: .omitted, time: .shortened))")
                     .font(Font.custom("Cause-Regular", size: 20))
                     .padding(.trailing, 25)
             }
@@ -87,5 +87,17 @@ struct MiniCardWorkshopComponent: View {
 }
 
 #Preview {
-    MiniCardWorkshopComponent(workshopModel: WorkshopModel(id: UUID(),name: "DRAWING A STORYBOARD",start_time: calendar.date(from: DateComponents(year: 2026, month: 11, day: 13, hour: 10, minute: 00))!,end_time: calendar.date(from: DateComponents(year: 2026, month: 11, day: 13, hour: 11, minute: 00))!,remainingTickets: 10,description: "Join this workshop to learn how to create and etablish a storyboard.",categoryTheme: .drawing))
+    MiniCardWorkshopComponent(
+        workshopModel: WorkshopModel(
+            id: UUID(),
+            name: "DRAWING A STORYBOARD",
+            startTime: calendar
+                .date(from: DateComponents(year: 2026, month: 11, day: 13, hour: 10, minute: 00))!,
+            endTime: calendar
+                .date(from: DateComponents(year: 2026, month: 11, day: 13, hour: 11, minute: 00))!,
+            remainingTickets: 10,
+            description: "Join this workshop to learn how to create and etablish a storyboard.",
+            categoryTheme: .drawing
+        )
+    )
 }
