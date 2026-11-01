@@ -10,13 +10,6 @@ import Foundation
 @Observable
 final class AccountManager {
 
-    #if targetEnvironment(simulator)
-    let url = "http://127.0.0.1:8081/users"
-    #else
-    // This ip address must be the local ip of your machine to build on an iphone in dev.
-    // You can find it in "Settings" -> "Wifi" -> "Details" -> "TCP/IP"
-    let url = "http://172.33.1.27:8081/users"
-    #endif
 
     let defaults = UserDefaults()
     var isLoggedIn = false
@@ -43,7 +36,7 @@ final class AccountManager {
     func login(email: String, password: String) async throws {
         let response = try await WebService.shared
             .apiCall(
-                url: "\(url)/login",
+                url: "\(WebService.url)/users/login",
                 method: .post,
                 responseType: AuthDTO.self,
                 body: LoginDTO(email: email, password: password)
@@ -58,7 +51,7 @@ final class AccountManager {
 
     func signin(username: String, email: String, password: String) async throws {
         let _ = try await WebService.shared.apiCall(
-            url: url,
+            url: "\(WebService.url)/users",
             method: .post,
             responseType: UserDTO.self,
             body: SigninDTO(

@@ -23,11 +23,25 @@ enum HTTPError: Error {
 class WebService {
     private let session: URLSession
 
+#if targetEnvironment(simulator)
+    static let url = "http://127.0.0.1:8081"
+#else
+    // This ip address must be the local ip of your machine to build on an iphone in dev.
+    // You can find it in "Settings" -> "Wifi" -> "Details" -> "TCP/IP"
+    static let url = "http://172.33.1.27:8081"
+#endif
+
     init(sessionConfig: URLSessionConfiguration = .default) {
         self.session = URLSession(configuration: sessionConfig)
     }
 
     static let shared = WebService()
+
+    var decoder: JSONDecoder {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        return decoder
+    }
 
     func apiCall<T:Decodable>(
         url: String,
@@ -72,10 +86,10 @@ class WebService {
 
         switch httpResponse.statusCode {
         case 200...209:
-            let result = try JSONDecoder().decode(responseType, from: data)
-            return result
+            return try decoder.decode(responseType, from: data)
+
         case 404:
-            let error = try JSONDecoder().decode(NotFoundError.self, from: data)
+            let error = try decoder.decode(NotFoundError.self, from: data)
             throw HTTPError.notFound(reason: error.reason)
         default:
 
