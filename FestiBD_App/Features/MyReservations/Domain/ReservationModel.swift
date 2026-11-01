@@ -18,7 +18,7 @@ struct ReservationModel: Identifiable {
     let status: ReservationStatus
     let workshopID: UUID
     let workshopName: String
-    let workshopCategory: String
+    let workshopCategory: CategoryColor
     let workshopStartTime: Date
     let workshopEndTime: Date
 }
