@@ -57,6 +57,7 @@ struct MiniCardWorkshopComponent: View {
                 )
                 .font(Font.custom("Cause-Regular", size: 20))
                 .padding(.trailing, 25)
+
             }
             .offset(y: 40)
 

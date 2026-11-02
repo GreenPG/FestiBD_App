@@ -8,21 +8,20 @@
 import SwiftUI
 
 struct MenuSectionComponent: View {
-    
+
     @Binding var activeDay: WeekEnd
-    @Binding var isSelected: Bool
-    
+    @Binding var viewModel: HomePageViewModel
+
     var body: some View {
-        
+
         VStack{
             HStack{
-                
+
                 Button{
-                    isSelected.toggle()
-                    if isSelected == true {
-                       activeDay = .friday
+                    activeDay = .friday
+                    Task {
+                        await viewModel.fetchWorkshops()
                     }
-                    
                 }label: {
                     VStack{
                         Text("13")
@@ -32,14 +31,13 @@ struct MenuSectionComponent: View {
                     }
                     .foregroundStyle(activeDay == .friday ? .black : .gray)
                 }
-                
-                  
+
+
                 Button{
-                    isSelected.toggle()
-                    if isSelected == true {
-                       activeDay = .saturday
+                    activeDay = .saturday
+                    Task {
+                        await viewModel.fetchWorkshops()
                     }
-                    
                 }label: {
                     VStack{
                         Text("14")
@@ -50,13 +48,12 @@ struct MenuSectionComponent: View {
                     .foregroundStyle(activeDay == .saturday ? .black : .gray)
                 }
                 .padding(.horizontal,57)
-                
+
                 Button{
-                    isSelected.toggle()
-                    if isSelected == true {
-                       activeDay = .sunday
+                    activeDay = .sunday
+                    Task {
+                        await viewModel.fetchWorkshops()
                     }
-                   
                 }label: {
                     VStack{
                         Text("15")
@@ -66,16 +63,16 @@ struct MenuSectionComponent: View {
                     }
                     .foregroundStyle(activeDay == .sunday ? .black : .gray)
                 }
-                
+
             }
-          
+
         }
         .padding(.vertical,15)
     }
 }
 
 #Preview {
-    MenuSectionComponent(activeDay: .constant(.friday), isSelected: .constant(false))
+    MenuSectionComponent(activeDay: .constant(.friday), viewModel: .constant(HomePageViewModel()))
 }
 
 
