@@ -46,7 +46,7 @@ final class MyReservationsViewModel {
 
     func cancelReservation(for id: UUID) async {
         do {
-            let result = try await WebService.shared.apiCall(
+            let _ = try await WebService.shared.apiCall(
                 url: "\(WebService.url)/reservations/\(id)",
                 method: .delete,
                 responseType: DeleteReservationDTO.self,
