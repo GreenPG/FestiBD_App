@@ -21,13 +21,17 @@ class Router {
 
     static let shared = Router()
 
-    var path = NavigationPath()
+    var path: [Route] = []
 
     func navigate(to route: Route) {
+        print(path)
         path.append(route)
+        print(path)
     }
 
     func navigateBack() {
+        print(path)
         path.removeLast()
+        print(path)
     }
 }

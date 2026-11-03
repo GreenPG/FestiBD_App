@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct HomePageView: View {
-    private var router = Router.shared
+    @Environment(Router.self) var router 
     @State private var viewModel = HomePageViewModel()
 
     var body: some View {
@@ -50,7 +50,7 @@ struct HomePageView: View {
                     } else {
                         ForEach(viewModel.state.workshops) { workshop in
                             Button {
-                                router.navigate(to: .WorkshopDetail(workshopId: UUID()))
+                                router.navigate(to: .WorkshopDetail(workshopId: workshop.id))
                             } label: {
                                 CardWorkshopComponent(workshopModel: workshop)
                             }

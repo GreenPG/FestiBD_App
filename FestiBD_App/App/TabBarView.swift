@@ -9,15 +9,53 @@ import SwiftUI
 
 struct TabBarView: View {
 
-    @Environment(Router.self) private var router
+    @State private var router = Router()
 
     var body: some View {
         TabView {
             Tab("Landing", systemImage: "house") {
-                HomePageView()
+                NavigationStack(path: $router.path) {
+                    HomePageView()
+                        .navigationDestination(for: Route.self) { route in
+                            switch route {
+                            case .Login:
+                                LoginView()
+                            case .Signin:
+                                SignInView()
+                            case .Home:
+                                HomePageView()
+                            case .WorkshopDetail(let id):
+                                WorkshopDetailView(workshopID: id)
+                            case .Reservations:
+                                MyReservationsView()
+                            case .TabBar:
+                                TabBarView()
+                            }
+                        }
+                }
+                .environment(router)
             }
             Tab("My Reservations", systemImage: "calendar") {
-                MyReservationsView()
+                NavigationStack(path: $router.path) {
+                    MyReservationsView()
+                        .navigationDestination(for: Route.self) { route in
+                            switch route {
+                            case .Login:
+                                LoginView()
+                            case .Signin:
+                                SignInView()
+                            case .Home:
+                                HomePageView()
+                            case .WorkshopDetail(let id):
+                                WorkshopDetailView(workshopID: id)
+                            case .Reservations:
+                                MyReservationsView()
+                            case .TabBar:
+                                TabBarView()
+                            }
+                        }
+                }
+                .environment(router)
             }
         }
         .tint(.accent)
