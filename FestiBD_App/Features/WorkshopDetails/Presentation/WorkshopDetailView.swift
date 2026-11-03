@@ -9,43 +9,71 @@ import Foundation
 import SwiftUI
 
 struct WorkshopDetailView: View {
-    
-    var workshop: WorkshopModel
-    
+
+    @State var viewModel = WorkshopDetailViewModel()
+    @Environment(Router.self) var router
+    var workshopID: UUID
+
     var body: some View {
-        GeometryReader { geometry in
-            ScrollView{
-                VStack(spacing: 7){
-                    
-                    TopComicComponentView(workshopModel: workshop)
-                        .frame(height: geometry.size.height * 0.25)
-                    
-                    HStack{
-                        
-                        MiddleLeftComicComponentView(workshopModel: workshop)
-                            .frame(height: geometry.size.height * 0.39)
-                        
-                        VStack{
-                            MiddleRightTopComicComponentView(workshopModel: workshop)
-                            .frame(height: geometry.size.height * 0.19)
-                            
-                            MiddleRightBottomComicComponentView(workshopModel: workshop)
-                            .frame(height: geometry.size.height * 0.19)
+        VStack {
+            if viewModel.state.isWorkshopLoading {
+                ProgressView()
+            } else {
+                GeometryReader { geometry in
+                    ScrollView {
+                        VStack(spacing: 15){
+                            TopComicComponentView()
+                                .frame(height: geometry.size.height * 0.25)
+                            HStack{
+                                MiddleLeftComicComponentView()
+                                    .frame(height: geometry.size.height * 0.39)
+                                VStack{
+                                    MiddleRightTopComicComponentView()
+                                        .frame(height: geometry.size.height * 0.19)
+                                    MiddleRightBottomComicComponentView()
+                                        .frame(height: geometry.size.height * 0.19)
+                                }
+                            }
+                            MiddleBottomComicComponentView()
+                                .frame(height: geometry.size.height * 0.25)
+
+                            BottomComicComponentView()
+                                .frame(height: geometry.size.height * 0.1)
+                        }
+                        .padding(10)
+                    }
+                }
+                .alert(
+                    viewModel.state.isBooked ? "Reservation Done !" : "Cancellation done",
+                    isPresented: $viewModel.state.isSuccessDialogPresented) {
+                        Button("Ok", role:.confirm) {
+                            viewModel.state.isSuccessDialogPresented = false
+                            router.navigateBack()
                         }
                     }
-                    
-                    MiddleBottomComicComponentView(workshopModel: workshop)
-                    .frame(height: geometry.size.height * 0.25)
-                    
-                    BottomComicComponentView(isBooked: true)
-                    .frame(height: geometry.size.height * 0.1)
-                }
-                .padding(.all, 10)
+                    .alert(
+                        viewModel.state.errorMessage,
+                        isPresented: $viewModel.state.isErrorDialogPresented
+                    ) {
+                        Button("Ok", role: .confirm) {
+                            viewModel.state.isErrorDialogPresented = false
+                            router.navigateBack()
+                        }
+                    }
+                    .environment(viewModel)
             }
         }
+        .task {
+            await viewModel.fetchWorkshop(for: workshopID)
+            await viewModel.fetchReservationStatus(for: workshopID)
+        }
+        .toolbarVisibility(.hidden, for: .tabBar)
     }
 }
 
 #Preview {
-    WorkshopDetailView(workshop: workshops[0])
+    WorkshopDetailView(
+        workshopID: UUID(uuidString: "5F552283-D785-4A0C-9D23-D53003DEDC1E") ?? UUID()
+    )
+    .environment(Router())
 }

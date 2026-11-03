@@ -8,7 +8,7 @@
 import Foundation
 
 enum HTTPMethod: String {
-    case get = "get"
+    case get = "GET"
     case post = "POST"
     case put = "PUT"
     case patch = "PATCH"
@@ -28,7 +28,7 @@ class WebService {
 #else
     // This ip address must be the local ip of your machine to build on an iphone in dev.
     // You can find it in "Settings" -> "Wifi" -> "Details" -> "TCP/IP"
-    static let url = "http://172.33.1.27:8081"
+    static let url = "http://172.33.1.80:8081"
 #endif
 
     init(sessionConfig: URLSessionConfiguration = .default) {

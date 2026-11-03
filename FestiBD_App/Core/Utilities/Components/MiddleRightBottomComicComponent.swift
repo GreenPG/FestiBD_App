@@ -9,9 +9,8 @@ import Foundation
 import SwiftUI
 
 struct MiddleRightBottomComicComponentView: View {
-    
-    let workshopModel : WorkshopModel
-    
+
+    @Environment(WorkshopDetailViewModel.self) var viewModel
     var body: some View {
         ZStack{
             
@@ -38,7 +37,7 @@ struct MiddleRightBottomComicComponentView: View {
             .stroke(.black, lineWidth: 2)
             .frame(width: 125, height: 125)
             
-            Text("ONLY \(workshopModel.remainingTickets) TICKETS LEFT")
+            Text("ONLY \(viewModel.state.workshop?.remainingTickets ?? 0) TICKETS LEFT")
                 .foregroundStyle(.blueComic)
                 .font(Font.custom("ComicsTricks", size: 25))
                 .padding(.horizontal, 30)
@@ -47,5 +46,6 @@ struct MiddleRightBottomComicComponentView: View {
 }
 
 #Preview {
-    MiddleRightBottomComicComponentView(workshopModel: workshops[0])
+    MiddleRightBottomComicComponentView()
+        .environment(WorkshopDetailViewModel())
 }

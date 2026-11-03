@@ -9,9 +9,9 @@ import Foundation
 import SwiftUI
 
 struct BottomComicComponentView: View {
-    
-    var isBooked: Bool
-    
+
+    @Environment(WorkshopDetailViewModel.self) var viewModel
+
     var body: some View {
         GeometryReader { geometry in
             ZStack{
@@ -49,34 +49,46 @@ struct BottomComicComponentView: View {
 //                    .fill(.yellow)
 //                    .stroke(.black, lineWidth: 1)
 //                    .frame(width: 160, height: 56)
-                
-                ZStack {
-                    Rectangle()
-                        .foregroundColor(.clear)
-                        .background(.redComic)
+
+                Button {
+                    Task {
+                        await viewModel.reservationButtonListener()
+                    }
+                } label: {
+                    ZStack {
+                        Rectangle()
+                            .foregroundColor(.clear)
+                            .background(.redComic)
+                            .frame(width: 230, height: 62)
+                            .border(.black, width: 3)
+                            .cornerRadius(5)
+                            .padding(.top, 15)
+                            .padding(.leading, 15)
+                        HStack(alignment: .center) {
+                            if viewModel.state.isReservationLoading {
+                                ProgressView()
+                            } else {
+                                Text(!viewModel.state.isBooked ? "BOOK IT" : "CANCEL IT")
+                                    .font(Font.custom("ComicsTricks", size: 32))
+                                    .foregroundStyle(.blueComic)
+                                    .padding(.vertical, 24)
+                            }
+                        }
                         .frame(width: 230, height: 62)
+                        .background(.yellowComic)
                         .border(.black, width: 3)
                         .cornerRadius(5)
-                        .padding(.top, 15)
-                        .padding(.leading, 15)
-                    HStack(alignment: .center) {
-                        Text(isBooked ? "BOOK IT" : "CANCELED IT")
-                            .font(Font.custom("ComicsTricks", size: 32))
-                            .foregroundStyle(.blueComic)
-                            .padding(.vertical, 24)
                     }
-                    .frame(width: 230, height: 62)
-                    .background(.yellowComic)
-                    .border(.black, width: 3)
-                    .cornerRadius(5)
+                    .frame(width: 330, height: 62)
+                    .padding(.bottom, 5)
+                    .disabled(viewModel.state.isReservationButtonDisabled)
                 }
-                .frame(width: 330, height: 62)
-                .padding(.bottom, 5)
             }
         }
     }
 }
 
 #Preview {
-    BottomComicComponentView(isBooked: true)
+    BottomComicComponentView()
+        .environment(WorkshopDetailViewModel())
 }

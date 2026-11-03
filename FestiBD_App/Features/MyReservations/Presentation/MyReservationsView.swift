@@ -9,11 +9,11 @@ import SwiftUI
 struct MyReservationsView : View {
 
     @State var viewModel = MyReservationsViewModel()
-    private var router = Router.shared
+    @Environment(Router.self) var router
 
     var body: some View {
 
-        VStack{
+        VStack {
             ScrollView {
                 ZStack{
                     HeaderComponentView(headerSize: .Reservations)
@@ -31,7 +31,9 @@ struct MyReservationsView : View {
                     }else {
                         ForEach(reservations) { reservation in
                             Button {
-                                router.navigate(to: .WorkshopDetail(workshopId: UUID()))
+                                router.navigate(to: .WorkshopDetail(
+                                    workshopId: reservation.workshopID
+                                ))
                             } label: {
                                 MiniCardWorkshopComponent(reservation: reservation)
                             }
@@ -51,7 +53,10 @@ struct MyReservationsView : View {
                     } else {
                         ForEach(reservations) { reservation in
                             Button {
-                                router.navigate(to: .WorkshopDetail(workshopId: UUID()))
+                                router
+                                    .navigate(
+                                        to: .WorkshopDetail(workshopId: reservation.workshopID)
+                                    )
                             } label: {
                                 MiniCardWorkshopComponent(reservation: reservation)
                             }
@@ -71,7 +76,10 @@ struct MyReservationsView : View {
                     } else {
                         ForEach(reservations) { reservation in
                             Button {
-                                router.navigate(to: .WorkshopDetail(workshopId: UUID()))
+                                router
+                                    .navigate(
+                                        to: .WorkshopDetail(workshopId: reservation.workshopID)
+                                    )
                             } label: {
                                 MiniCardWorkshopComponent(reservation: reservation)
                             }
@@ -93,4 +101,5 @@ struct MyReservationsView : View {
 
 #Preview {
     MyReservationsView()
+        .environment(Router())
 }

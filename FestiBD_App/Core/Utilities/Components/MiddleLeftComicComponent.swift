@@ -9,41 +9,46 @@ import Foundation
 import SwiftUI
 
 struct MiddleLeftComicComponentView: View {
-    
-    let workshopModel : WorkshopModel
-    
+
+    @Environment(WorkshopDetailViewModel.self) var viewModel
+
     var body: some View {
         ZStack{
-            
+
             Rectangle()
                 .fill(.redComic)
                 .stroke(.black, lineWidth: 2)
-            
+
             StarShape(corners: 5, smoothness: 0.5)
                 .fill(.blueComic)
                 .stroke(.black, lineWidth: 2)
                 .frame(width: 30, height: 30)
                 .offset(x: -60, y: 125)
-            
+
             StarShape(corners: 5, smoothness: 0.5)
                 .fill(.white)
                 .stroke(.black, lineWidth: 2)
                 .frame(width: 30, height: 30)
                 .offset(x: 60, y: -125)
-            
+
             StarShape(corners: 15, smoothness: 0.7)
                 .fill(.yellowComic)
                 .stroke(.black, lineWidth: 2)
                 .frame(width: 175, height: 200)
-            
+
             StarShape(corners: 15, smoothness: 0.7)
                 .fill(.white)
                 .frame(width: 160, height: 180)
-            
+
             VStack{
-                Text("\(workshopModel.start_time.formatted(date: .omitted, time: .shortened))")
+                Text(
+                    viewModel.state.workshop?.startTime.formatted(date: .omitted, time: .shortened) ??
+                    Date().formatted(date: .omitted, time: .shortened))
                 Text("-")
-                Text("\(workshopModel.end_time.formatted(date: .omitted, time: .shortened))")
+                Text(
+                    viewModel.state.workshop?.endTime.formatted(date: .omitted, time: .shortened) ??
+                    Date().formatted(date: .omitted, time: .shortened)
+                )
             }
             .foregroundStyle(.redComic)
             .font(Font.custom("ComicsTricks", size: 22))
@@ -53,5 +58,6 @@ struct MiddleLeftComicComponentView: View {
 }
 
 #Preview {
-    MiddleLeftComicComponentView(workshopModel: WorkshopModel(id: UUID(),name: "DRAWING A STORYBOARD",start_time: calendar.date(from: DateComponents(year: 2026, month: 11, day: 13, hour: 10, minute: 00))!,end_time: calendar.date(from: DateComponents(year: 2026, month: 11, day: 13, hour: 11, minute: 00))!,remainingTickets: 10,description: "Join this workshop to learn how to create and etablish a storyboard.",categoryTheme: .drawing))
+    MiddleLeftComicComponentView()
+        .environment(WorkshopDetailViewModel())
 }

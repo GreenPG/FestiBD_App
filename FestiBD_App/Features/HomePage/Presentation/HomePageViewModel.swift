@@ -32,7 +32,6 @@ final class HomePageViewModel {
             state.workshops = workshopsDTO.map { workshopDTO in
                 workshopDTO.toModel()
             }
-            print(state.workshops)
         } catch  {
             print(error)
         }
