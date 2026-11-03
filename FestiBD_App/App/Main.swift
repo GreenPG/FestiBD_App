@@ -9,34 +9,21 @@ import SwiftUI
 
 struct Main: View {
 
-    @State private var router = Router()
-
     var body: some View {
-        if AccountManager.shared.isLoggedIn {
-            NavigationStack {
+        ZStack {
+            switch AccountManager.shared.isLoggedIn {
+            case .loggedIn:
                 TabBarView()
-                    .navigationDestination(for: Route.self) { route in
-                        switch route {
-                        case .Login:
-                            LoginView()
-                        case .Signin:
-                            SignInView()
-                        case .Home:
-                            HomePageView()
-                        case .WorkshopDetail(let id):
-                            //TODO: navigation to workshop detail
-                            HomePageView()
-                        case .Reservations:
-                            MyReservationsView()
-                        case .TabBar:
-                            TabBarView()
-                        }
-                    }
+                    .navigationTransition(.crossFade)
+            case .disconnected:
+                AuthView()
+                    .navigationTransition(.crossFade)
+            case .unknown:
+                LaunchScreenView()
+                    .navigationTransition(.crossFade)
             }
-            .environment(router)
-        } else {
-            AuthView()
         }
+        .animation(.easeInOut(duration: 0.4), value: AccountManager.shared.isLoggedIn)
     }
 }
 

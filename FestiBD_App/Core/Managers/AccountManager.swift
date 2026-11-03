@@ -7,18 +7,22 @@
 
 import Foundation
 
+enum LogStatus {
+    case loggedIn
+    case disconnected
+    case unknown
+}
+
 @Observable
 final class AccountManager {
 
 
     let defaults = UserDefaults()
-    var isLoggedIn = false
+    var isLoggedIn: LogStatus = .unknown
 
     static let shared = AccountManager()
 
-    init(isLoggedIn: Bool = false) {
-        self.isLoggedIn = isLoggedIn
-
+    init() {
         if defaults.bool(forKey: "isRememberMeActive") {
             Task {
                 do {
@@ -30,6 +34,8 @@ final class AccountManager {
                     defaults.set(false, forKey: "isRememberMeActive")
                 }
             }
+        } else {
+            self.isLoggedIn = .disconnected
         }
     }
 
@@ -42,7 +48,7 @@ final class AccountManager {
                 body: LoginDTO(email: email, password: password)
             )
         KeychainManager.set(response.token, forKey: "jwttoken")
-        isLoggedIn = true
+        isLoggedIn = .loggedIn
         if defaults.bool(forKey: "isRememberMeActive") {
             KeychainManager.set(email, forKey: "account")
             KeychainManager.set(password, forKey: "password")
