@@ -9,9 +9,9 @@ import Foundation
 import SwiftUI
 
 struct TopComicComponentView: View {
-    
-    let workshopModel : WorkshopModel
-    
+
+    @Environment(WorkshopDetailViewModel.self) var viewModel
+
     var body: some View {
         ZStack{
             Rectangle()
@@ -48,7 +48,7 @@ struct TopComicComponentView: View {
                 .frame(width: 325, height: 150)
                 .shadow(radius: 10)
             
-            Text("\(workshopModel.name)")
+            Text(viewModel.state.workshop?.name.uppercased() ?? "")
                 .foregroundStyle(.blueComic)
                 .font(Font.custom("ComicsTricks", size: 32))
                 .padding(.bottom, 30)
@@ -58,5 +58,6 @@ struct TopComicComponentView: View {
 }
 
 #Preview {
-    TopComicComponentView(workshopModel: workshops[0])
+    TopComicComponentView()
+        .environment(WorkshopDetailViewModel())
 }

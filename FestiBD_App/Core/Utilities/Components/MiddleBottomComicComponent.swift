@@ -9,9 +9,9 @@ import Foundation
 import SwiftUI
 
 struct MiddleBottomComicComponentView: View {
-    
-    let workshopModel : WorkshopModel
-    
+
+    @Environment(WorkshopDetailViewModel.self) var viewModel
+
     var body: some View {
         ZStack{
             Rectangle()
@@ -44,7 +44,7 @@ struct MiddleBottomComicComponentView: View {
                 .offset(x: 140, y: -40)
                 .rotationEffect(.degrees(15))
             
-            Text("\(workshopModel.description)")
+            Text("\(viewModel.state.workshop?.description ?? "")")
                 .font(Font.custom("Cause-Regular", size: 18))
                 .multilineTextAlignment(.leading)
                 .lineLimit(4)
@@ -55,5 +55,6 @@ struct MiddleBottomComicComponentView: View {
 }
 
 #Preview {
-    MiddleBottomComicComponentView(workshopModel: workshops[0])
+    MiddleBottomComicComponentView()
+        .environment(WorkshopDetailViewModel())
 }
