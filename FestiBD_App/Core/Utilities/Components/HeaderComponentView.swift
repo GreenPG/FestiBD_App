@@ -1,0 +1,44 @@
+//
+//  HeaderComponentView.swift
+//  FestiBD_App
+//
+//  Created by Apprenant 85 on 30/09/2026.
+//
+
+import SwiftUI
+
+struct HeaderComponentView : View {
+//    var isSmall : Bool = false
+    var headerSize: HeaderSizeEnum
+    var body: some View {
+
+
+        VStack{
+            ZStack{
+
+                Rectangle()
+                    .frame(width: 438, height: headerSize.rawValue)
+                    .foregroundStyle(.accent)
+                    .offset(x: 0, y: -40)
+
+                Rectangle()
+                    .frame(width: 438, height: headerSize.rawValue)
+                    .foregroundStyle(.accent)
+                    .rotationEffect(Angle(degrees: -5))
+
+            }
+
+            Divider()
+                .frame(minHeight: 20)
+                .overlay(Color.appYellow)
+                .rotationEffect(Angle(degrees: -5))
+                .offset(y: -20)
+            Spacer()
+        }
+        .ignoresSafeArea()
+    }
+}
+
+#Preview {
+    HeaderComponentView(headerSize: .LoginSignin)
+}

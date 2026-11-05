@@ -1,0 +1,105 @@
+//
+//  LoginView.swift
+//  FestiBD_App
+//
+//  Created by Apprenant76 on 05/10/2026.
+//
+
+import SwiftUI
+
+struct LoginView: View {
+
+
+    var body: some View {
+        VStack {
+            ZStack(alignment: .center) {
+                HeaderComponentView(headerSize: .LoginSignin)
+                Image("Logo")
+            }
+            .ignoresSafeArea()
+            .frame(maxWidth: 376, maxHeight: 325)
+            LoginScreenContentView()
+                .padding(.horizontal, 16)
+        }
+    }
+}
+
+struct LoginScreenContentView: View {
+
+    @State var viewModel = LoginViewModel()
+
+    var body: some View {
+        VStack(spacing: 20) {
+            EmailTextFieldComponent(
+                email: $viewModel.state.email,
+                isEmailValid: $viewModel.state.isEmailValid
+            )
+            .padding(.top, 30)
+            .frame(minHeight: 60)
+            .onChange(of: viewModel.state.email) {
+                viewModel.checkEmail()
+            }
+            PasswordTextFieldComponent(
+                password: $viewModel.state.password,
+                isPasswordValid: $viewModel.state.isPasswordValid
+            )
+            .frame(minHeight: 60)
+            .onChange(of: viewModel.state.password) {
+                viewModel.checkPassword()
+            }
+            HStack(spacing: 25) {
+                HStack {
+                    Toggle(
+                        "Remember Me",
+                        systemImage: viewModel.state.isRememberMeActive ? "checkmark.square" : "square",
+                        isOn: $viewModel.state.isRememberMeActive,
+                    )
+                    .font(Font.custom("Armata", size: 16))
+                    .frame(maxWidth: .infinity)
+                    .toggleStyle(.button)
+                    .backgroundStyle(.clear)
+                    .foregroundStyle(.black)
+                    .tint(.clear)
+                }
+                Button {
+                } label: {
+                    Text("Forget password ?")
+                        .font(Font.custom("Armata", size: 16))
+                        .foregroundStyle(.black)
+                }
+
+            }
+            .padding(.vertical, 30)
+            Button {
+                Task {
+                    viewModel.state.isLoginDisabled = true
+                    await viewModel.submitLogin()
+                    viewModel.state.isLoginDisabled = false
+                }
+            } label: {
+                SigninLoginButtonComponent(
+                    isLogin: true,
+                    isDisabled: viewModel.state.isLoginDisabled
+                )
+            }
+            .disabled(viewModel.state.isLoginDisabled)
+            Text(viewModel.state.hasLoginFailed ? "Login Failed : \(viewModel.state.loginErrorMessage)" : "")
+                .foregroundStyle(.red)
+                .font(Font.custom("Atrama", size: 14))
+            SigninLoginDividerComponent()
+                .padding(.vertical, 15)
+            HStack {
+                Text("Don't have an account ?")
+                NavigationLink("Sign up") {
+                    SignInView()
+                }
+            }
+            .font(Font.custom("Armata", size: 16))
+        }
+        .navigationBarBackButtonHidden()
+    }
+}
+
+#Preview {
+    LoginView()
+}
