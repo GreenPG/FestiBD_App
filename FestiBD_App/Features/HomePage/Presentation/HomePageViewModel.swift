@@ -16,11 +16,11 @@ final class HomePageViewModel {
         let dateString: String
         switch state.activeDay {
         case .friday:
-            dateString = "2026-09-13T00:00:00Z"
+            dateString = "2026-11-13T00:00:00Z"
         case .saturday:
-            dateString = "2026-09-14T00:00:00Z"
+            dateString = "2026-11-14T00:00:00Z"
         case .sunday:
-            dateString = "2026-09-15T00:00:00Z"
+            dateString = "2026-11-15T00:00:00Z"
         }
         do {
             let workshopsDTO: [WorkshopDTO] = try await WebService.shared.apiCall(
