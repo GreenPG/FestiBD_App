@@ -32,11 +32,11 @@ final class MyReservationsViewModel {
         var date: Date
         switch day {
         case .friday:
-            date = calendar.date(from: DateComponents(year: 2026, month: 09, day: 13))!
+            date = calendar.date(from: DateComponents(year: 2026, month: 11, day: 13))!
         case .saturday:
-            date = calendar.date(from: DateComponents(year: 2026, month: 09, day: 14))!
+            date = calendar.date(from: DateComponents(year: 2026, month: 11, day: 14))!
         case .sunday:
-            date = calendar.date(from: DateComponents(year: 2026, month: 09, day: 15))!
+            date = calendar.date(from: DateComponents(year: 2026, month: 11, day: 15))!
         }
         return  state.reservations.filter({
             return calendar
